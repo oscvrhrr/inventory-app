@@ -19,11 +19,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/new", (req, res) => {
-    userController.createUsernameGet(req,res);
+    userController.getFormGet(req, res);
 });
 
 app.post("/new", (req, res) => {
     userController.createUsernamePost(req, res);
+});
+
+app.get('/delete', (req, res) => {
+    userController.deleteAllUsernames(req, res)
 });
 
 
