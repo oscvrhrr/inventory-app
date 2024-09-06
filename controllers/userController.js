@@ -1,13 +1,21 @@
 const db = require("../db/queries");
 
-async function getUsernames(req, res) {
-    const usernames = await db.getAllUsernames();
-    console.log('Username: ', usernames);
-    res.send("Username: " + usernames.map((user) => user.username).join(", "));
+async function createUsernameGet(req, res) {
+
+   const username = req.query.search;
+   if(username && username.trim() !== '') {
+       const result = await db.getUsername(username);
+       res.render('index', { result });
+   } else {
+        res.render('index', { result: [] });
+   }
+   
 }
 
-async function createUsernameGet(req, res) {
-    res.render("form");
+async function getUsername(req, res) {
+    const usernames = await db.getUsername(req.query);
+    console.log('Username: ', usernames);
+    res.send("Username: " + usernames.map((user) => user.username).join(", "));
 }
 
 async function createUsernamePost(req, res) {
@@ -19,7 +27,7 @@ async function createUsernamePost(req, res) {
 }
 
 module.exports = {
-    getUsernames,
+    getUsername,
     createUsernameGet,
     createUsernamePost,
 

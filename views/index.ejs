@@ -9,6 +9,12 @@
     <main>
         <h1>hello welcome</h1>
         <a href="/new"><button style="background-color: pink;">Click me baby!</button></a>
+        <form action="/" method="get">
+            <label for="search">search a username</label>
+            <input type="text" name="search" id="search">
+            <button type="submit">search</button>
+        </form>
+        <li><%= result.map((user) => user.username) %></li>
     </main>
 </body>
 </html>
